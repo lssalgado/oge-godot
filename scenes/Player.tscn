@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/player/player.png" type="Texture" id=1]
+[ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 3.65039
-height = 6.20945
+radius = 4.0
+height = 8.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -41,15 +42,15 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-vframes = 4
 hframes = 12
-frame = 12
+vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.257004, 1.551 )
+position = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
