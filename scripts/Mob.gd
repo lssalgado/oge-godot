@@ -1,17 +1,17 @@
 extends KinematicBody2D
 
 
-const ACCELERATION = 256
-const MAX_SPEED = 32
-const GRAVITY = 300
+const ACCELERATION: int = 256
+const MAX_SPEED: int = 32
+const GRAVITY: int = 300
 
-var direction = 1
-var motion = Vector2.ZERO
+var direction: int = 1
+var motion: Vector2 = Vector2.ZERO
 
 func _ready():
 	$AnimatedSprite.play("walk")
 
-func process_horizontal_movement(delta):
+func process_horizontal_movement(delta: float):
 	motion.x += direction * ACCELERATION * delta
 	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	
@@ -23,16 +23,16 @@ func process_horizontal_movement(delta):
 		direction = direction * -1
 		$Ledge.position.x *= -1
 	
-func process_vertical_movement(delta):
+func process_vertical_movement(delta: float):
 	motion.y += GRAVITY * delta
 	
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	process_horizontal_movement(delta)
 	process_vertical_movement(delta)
 	
 	motion = move_and_slide(motion, Vector2.UP)
 
-func _on_Top_body_entered(body):
+func _on_Top_body_entered(body: Node):
 	if body.is_in_group("Player") == true:
 		queue_free()

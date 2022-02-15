@@ -16,11 +16,9 @@ animations = [ {
 extents = Vector2( 2.22863, 6.44753 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 2.94732, 0.650143 )
+extents = Vector2( 2.222, 0.443 )
 
-[node name="Mob" type="KinematicBody2D" groups=[
-"Mob",
-]]
+[node name="Mob" type="KinematicBody2D" groups=["Mob"]]
 position = Vector2( 0.223221, -0.23597 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -45,6 +43,7 @@ cast_to = Vector2( 0, 25 )
 [node name="Top" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -6.20702 )
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="Top" to="." method="_on_Top_body_entered"]

@@ -1,20 +1,22 @@
 extends KinematicBody2D
 
-#constantes relacionadas a fisica e gravidade
-const ACCELERATION = 256
-const MAX_SPEED = 64
-const FRICTION = 0.15
-const NO_RESISTANCE = 0.0
-const AIR_RESISTANCE = 0.035
-const GRAVITY = 300
-const JUMP_FORCE = 150
+class_name Player
 
-var motion = Vector2.ZERO
+#constantes relacionadas a fisica e gravidade
+const ACCELERATION: int = 256
+const MAX_SPEED: int = 64
+const FRICTION: float = 0.15
+const NO_RESISTANCE: float = 0.0
+const AIR_RESISTANCE: float = 0.035
+const GRAVITY: int = 300
+const JUMP_FORCE: int = 150
+
+var motion: Vector2 = Vector2.ZERO
 
 onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 
-func process_horizontal_movement(direction, delta):
+func process_horizontal_movement(direction: float, delta: float):
 	if direction != 0:
 		animation_player.play("walk")
 		#movimento no eixo x = direction(esquerda ou direita) * aceleracao * real time
@@ -26,8 +28,8 @@ func process_horizontal_movement(direction, delta):
 	else:
 		animation_player.play("idle")
 	
-func process_vertical_movement(direction, delta):
-	var resistance = NO_RESISTANCE
+func process_vertical_movement(direction: float, delta: float)-> float:
+	var resistance: float = NO_RESISTANCE
 	#aumenta a gravidade a cada frame
 	motion.y += GRAVITY * delta
 	
@@ -45,7 +47,7 @@ func process_vertical_movement(direction, delta):
 	return resistance
 
 # usamos _phiscs_process(delta) pois roda runtime em um valor fixo de frames
-func _physics_process(delta):
+func _physics_process(delta: float):
 	
 	"""
 	input_x faz um calculo do input de movimento do jogador
@@ -55,11 +57,11 @@ func _physics_process(delta):
 	 - Se o player não está segurando nada o valor é 0
 	"""
 	
-	var input_x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var input_x: float = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	
 	process_horizontal_movement(input_x, delta)
 	
-	var resistance = process_vertical_movement(input_x, delta)
+	var resistance: float = process_vertical_movement(input_x, delta)
 	
 	motion.x = lerp(motion.x, 0, resistance)
 	motion = move_and_slide(motion, Vector2.UP)
