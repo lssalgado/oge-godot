@@ -34,5 +34,5 @@ func _physics_process(delta):
 	motion = move_and_slide(motion, Vector2.UP)
 
 func _on_Top_body_entered(body):
-	if body.get_name() == "Player":
+	if body.is_in_group("Player") == true:
 		queue_free()

@@ -13,10 +13,6 @@ const START_POSITION = Vector2(8.0, 24.0)
 var player
 var mobs = Array()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 func get_tile_position(collum, row):
 	var x = (collum * 16 + 8)
 	var y = (row * 16 + 8)
@@ -40,20 +36,18 @@ func add_mobs():
 	mobs.append(mob)
 
 func new_game():
-	remove_child(player)
-	player = player_scene.instance()
-	add_child(player)
-	player.position = START_POSITION
-	
+	get_tree().reload_current_scene()
+
+func _ready():
 	add_mobs()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	new_game()
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("restart"):
-		get_tree().reload_current_scene()
+		new_game()
+
+
+func _on_Void_body_entered(body):
+	if body.is_in_group("Player") == true:
+		new_game()
+	elif body.is_in_group("Mob") == true:
+		body.queue_free()
