@@ -11,17 +11,20 @@ var motion: Vector2 = Vector2.ZERO
 func _ready():
 	$AnimatedSprite.play("walk")
 
+func change_direction():
+	direction = direction * -1
+	$Ledge.position.x *= -1
+	$WallCollision.position.x *= -1
+
 func process_horizontal_movement(delta: float):
 	motion.x += direction * ACCELERATION * delta
 	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 	
 	if $Ledge.is_colliding() == false:
-		direction = direction * -1
-		$Ledge.position.x *= -1
+		change_direction()
 	
-	if is_on_wall() == true:
-		direction = direction * -1
-		$Ledge.position.x *= -1
+	if $WallCollision.is_colliding() == true:
+		change_direction()
 	
 func process_vertical_movement(delta: float):
 	motion.y += GRAVITY * delta

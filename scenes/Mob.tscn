@@ -36,14 +36,19 @@ shape = SubResource( 2 )
 one_way_collision_margin = 0.0
 
 [node name="Ledge" type="RayCast2D" parent="."]
-position = Vector2( 8, -2 )
+position = Vector2( 6, 6 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+cast_to = Vector2( 0, 17 )
 
 [node name="Top" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
 position = Vector2( 0, -6.20702 )
 shape = SubResource( 3 )
+
+[node name="WallCollision" type="RayCast2D" parent="."]
+position = Vector2( 5, 0 )
+enabled = true
+cast_to = Vector2( 1, 0 )
 
 [connection signal="body_entered" from="Top" to="." method="_on_Top_body_entered"]
