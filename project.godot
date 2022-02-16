@@ -9,17 +9,23 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://scripts/Entity.gd"
+}, {
 "base": "Node",
 "class": "OgeWorld",
 "language": "GDScript",
 "path": "res://scripts/World.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Entity",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/player/player.gd"
 } ]
 _global_script_class_icons={
+"Entity": "",
 "OgeWorld": "",
 "Player": ""
 }

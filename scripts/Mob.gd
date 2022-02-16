@@ -1,14 +1,8 @@
-extends KinematicBody2D
+extends Entity
 
-
-const ACCELERATION: int = 256
-const MAX_SPEED: int = 32
-const GRAVITY: int = 300
-
-var direction: int = 1
-var motion: Vector2 = Vector2.ZERO
 
 func _ready():
+	set_physics_process(true)
 	$AnimatedSprite.play("walk")
 
 func change_direction():
@@ -17,24 +11,16 @@ func change_direction():
 	$WallCollision.position.x *= -1
 
 func process_horizontal_movement(delta: float):
-	motion.x += direction * ACCELERATION * delta
-	motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
-	
+	.process_horizontal_movement(delta)
 	if $Ledge.is_colliding() == false:
 		change_direction()
 	
 	if $WallCollision.is_colliding() == true:
 		change_direction()
-	
-func process_vertical_movement(delta: float):
-	motion.y += GRAVITY * delta
-	
+
 
 func _physics_process(delta: float):
-	process_horizontal_movement(delta)
-	process_vertical_movement(delta)
-	
-	motion = move_and_slide(motion, Vector2.UP)
+	physics_process(delta)
 
 func _on_Top_body_entered(body: Node):
 	if body.is_in_group("Player") == true:
