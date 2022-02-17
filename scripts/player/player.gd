@@ -9,6 +9,9 @@ func _ready():
 	max_speed = 64
 	jump_force = 150
 
+func take_damage():
+	print("Damage Taken")
+
 func process_horizontal_movement(delta: float):
 	.process_horizontal_movement(delta)
 	if direction != 0:
