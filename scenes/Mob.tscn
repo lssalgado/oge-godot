@@ -8,7 +8,7 @@
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
 "loop": true,
-"name": "Walk",
+"name": "walk",
 "speed": 5.0
 } ]
 
@@ -25,16 +25,21 @@ extents = Vector2( 0.851883, 5.34192 )
 "Mob",
 ]]
 position = Vector2( 0.223221, -0.23597 )
+collision_layer = 8
+collision_mask = 3
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Skin" type="Node2D" parent="."]
 rotation = -1.5708
 scale = Vector2( 0.1, 0.1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Skin"]
+scale = Vector2( 1, 1 )
 frames = SubResource( 1 )
-animation = "Walk"
+animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -46,13 +51,11 @@ one_way_collision_margin = 0.0
 position = Vector2( 5, 6 )
 enabled = true
 cast_to = Vector2( 6, 0 )
-collision_mask = 2
 
 [node name="WallCollision2" type="RayCast2D" parent="Raycasts"]
 position = Vector2( 5, -12 )
 enabled = true
 cast_to = Vector2( 6, 0 )
-collision_mask = 2
 
 [node name="Ledge" type="RayCast2D" parent="Raycasts"]
 position = Vector2( 6, 6 )
@@ -62,12 +65,16 @@ cast_to = Vector2( 0, 17 )
 [node name="Event_Collisions" type="Node2D" parent="."]
 
 [node name="Top" type="Area2D" parent="Event_Collisions"]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Event_Collisions/Top"]
 position = Vector2( 0, -6.20702 )
 shape = SubResource( 3 )
 
 [node name="Sides" type="Area2D" parent="Event_Collisions"]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Event_Collisions/Sides"]
 position = Vector2( -4, 0 )

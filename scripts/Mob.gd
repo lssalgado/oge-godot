@@ -3,7 +3,7 @@ extends Entity
 
 func _ready():
 	set_physics_process(true)
-	$AnimatedSprite.play("walk")
+	$Skin/AnimatedSprite.play("walk")
 
 func change_direction():
 	direction = direction * -1
@@ -24,5 +24,9 @@ func _physics_process(delta: float):
 	physics_process(delta)
 
 func _on_Top_body_entered(body: Node):
-	if body.is_in_group("Player") == true:
+	if body.is_in_group("Player"):
 		queue_free()
+
+func _on_Sides_body_entered(body):
+	if body.is_in_group("Player") and body.invulnerable == false:
+		body.take_damage()
