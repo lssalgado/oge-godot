@@ -25,8 +25,7 @@ extents = Vector2( 0.851883, 5.34192 )
 "Mob",
 ]]
 position = Vector2( 0.223221, -0.23597 )
-collision_layer = 8
-collision_mask = 3
+collision_layer = 4
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -37,7 +36,6 @@ rotation = -1.5708
 scale = Vector2( 0.1, 0.1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Skin"]
-scale = Vector2( 1, 1 )
 frames = SubResource( 1 )
 animation = "walk"
 
@@ -62,26 +60,30 @@ position = Vector2( 6, 6 )
 enabled = true
 cast_to = Vector2( 0, 17 )
 
-[node name="Event_Collisions" type="Node2D" parent="."]
+[node name="EventCollisions" type="Node2D" parent="."]
 
-[node name="Top" type="Area2D" parent="Event_Collisions"]
-collision_layer = 4
+[node name="Top" type="Area2D" parent="EventCollisions"]
+modulate = Color( 0.431373, 0, 1, 1 )
+monitorable = false
+collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Event_Collisions/Top"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventCollisions/Top"]
 position = Vector2( 0, -6.20702 )
 shape = SubResource( 3 )
 
-[node name="Sides" type="Area2D" parent="Event_Collisions"]
-collision_layer = 4
+[node name="Sides" type="Area2D" parent="EventCollisions"]
+modulate = Color( 0.431373, 0, 1, 1 )
+monitorable = false
+collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Event_Collisions/Sides"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EventCollisions/Sides"]
 position = Vector2( -4, 0 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Event_Collisions/Sides"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EventCollisions/Sides"]
 position = Vector2( 4, 0 )
 shape = SubResource( 4 )
-[connection signal="body_entered" from="Event_Collisions/Top" to="." method="_on_Top_body_entered"]
-[connection signal="body_entered" from="Event_Collisions/Sides" to="." method="_on_Sides_body_entered"]
+[connection signal="body_entered" from="EventCollisions/Top" to="." method="_on_Top_body_entered"]
+[connection signal="body_entered" from="EventCollisions/Sides" to="." method="_on_Sides_body_entered"]
