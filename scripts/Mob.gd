@@ -1,5 +1,7 @@
 extends Entity
 
+signal mob_death
+
 onready var animated_sprite = $AnimatedSprite
 onready var ledge_collision = $Raycasts/LedgeCollision
 onready var jump_collision = $Raycasts/JumpCollision
@@ -34,6 +36,11 @@ func _on_TopArea_body_entered(body: Node):
 	if body.global_position.y <= top_area.global_position.y - 12:
 		take_damage(1)
 	
+
+func on_death():
+	print("mob_death emited")
+	emit_signal("mob_death")
+	.on_death()
 
 func _on_SideArea_body_entered(body):
 	if body.is_in_group("Player") and body.invulnerable == false:

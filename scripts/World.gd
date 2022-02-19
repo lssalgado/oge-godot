@@ -5,6 +5,10 @@ class_name OgeWorld
 export(PackedScene) var player_scene
 export(PackedScene) var mob_scene
 
+signal mob_spawned
+signal mob_died
+signal player_ready
+
 const COLLUMS: int = 20
 const ROWS: int = 11
 const TILE_SIZE: int = 16
@@ -26,6 +30,8 @@ func add_mob(collum: int, row: int):
 	var mob = mob_scene.instance()
 	add_child(mob)
 	mob.position = get_tile_position(collum, row)
+	emit_signal("mob_spawned")
+	mob.connect("mob_death", self, "on_mob_death")
 	return mob
 
 func add_mobs():
@@ -44,6 +50,8 @@ func place_player():
 	player = player_scene.instance()
 	add_child(player)
 	player.position= get_tile_position(player_collum, player_row)
+	$Player.connect("player_dead", self, "on_player_dead")
+	emit_signal("player_ready")
 
 func new_game():
 	print("new_game")
@@ -53,8 +61,6 @@ func _ready():
 	print("_ready")
 	add_mobs()
 	place_player()
-	
-	$Player.connect("player_dead", self, "on_player_dead")
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("restart"):
@@ -68,3 +74,6 @@ func _on_Void_body_entered(body: Node):
 
 func on_player_dead():
 	new_game()
+	
+func on_mob_death():
+	emit_signal("mob_died")
