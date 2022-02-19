@@ -9,6 +9,12 @@ export(PackedScene) var heart_scene
 onready var grid_container = $GridContainer
 var hearts = Array()
 
+func _ready():
+	var player_node = get_tree().get_root().find_node("Player",true,false)
+	var amount: int
+	player_node.connect("health_changed",self,"_on_player_health_changed")
+	update_heart_count(player_node.lives)
+
 func update_heart_count(amount: int):
 	if hearts.size() < amount:
 		var hearts_to_add = amount - hearts.size()
@@ -23,3 +29,5 @@ func update_heart_count(amount: int):
 			heart.queue_free()
 	
 
+func _on_player_health_changed(amount: int):
+	update_heart_count(amount)
