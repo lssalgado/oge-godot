@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Interface.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Heart.tscn" type="PackedScene" id=2]
+
+[node name="Interface" type="CanvasLayer"]
+script = ExtResource( 1 )
+heart_scene = ExtResource( 2 )
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 50.0
+margin_bottom = 48.0
+columns = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
