@@ -8,11 +8,13 @@ onready var sprite = $Sprite
 onready var animation_player = $Sprite/AnimationPlayer
 onready var animation_effects = $Sprite/AnimationEffects
 onready var damage_timer = $Timers/Damage_Timer
+onready var interface = $Interface
 
 func _ready():
 	max_speed = 64
 	jump_force = 150
 	lives = 3
+	interface.update_heart_count(3)
 
 func after_damage_taken():
 	animation_effects.play("damage")
@@ -20,6 +22,10 @@ func after_damage_taken():
 	damage_timer.start()
 	invulnerable = true
 	set_collision_mask_bit(2, false)
+
+func take_damage(damage: int):
+	.take_damage(damage)
+	interface.update_heart_count(lives)
 
 
 func on_death():
