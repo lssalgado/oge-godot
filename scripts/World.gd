@@ -53,6 +53,8 @@ func _ready():
 	print("_ready")
 	add_mobs()
 	place_player()
+	
+	$Player.connect("player_dead", self, "on_player_dead")
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("restart"):
@@ -63,3 +65,6 @@ func _on_Void_body_entered(body: Node):
 		new_game()
 	elif body.is_in_group("Mob") == true:
 		body.queue_free()
+
+func on_player_dead():
+	new_game()

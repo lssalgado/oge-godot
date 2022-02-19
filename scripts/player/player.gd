@@ -2,12 +2,28 @@ extends Entity
 
 class_name Player
 
+signal player_dead
+
 onready var sprite = $Sprite
-onready var animation_player = $AnimationPlayer
+onready var animation_player = $Sprite/AnimationPlayer
+onready var animation_effects = $Sprite/AnimationEffects
+onready var damage_timer = $Timers/Damage_Timer
 
 func _ready():
 	max_speed = 64
 	jump_force = 150
+	lives = 3
+
+func after_damage_taken():
+	animation_effects.play("damage")
+	animation_effects.queue("flash")
+	damage_timer.start()
+	invulnerable = true
+	set_collision_mask_bit(2, false)
+
+
+func on_death():
+	emit_signal("player_dead")
 
 func process_horizontal_movement(delta: float):
 	.process_horizontal_movement(delta)
@@ -35,4 +51,8 @@ func _physics_process(delta: float):
 	direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	
 	physics_process(delta)
-	
+
+func _on_Damage_Timer_timeout():
+	animation_effects.play("rest")
+	invulnerable = false
+	set_collision_mask_bit(2, true)

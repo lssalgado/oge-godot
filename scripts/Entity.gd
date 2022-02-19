@@ -10,6 +10,8 @@ const AIR_RESISTANCE: float = 0.035
 
 var max_speed: int = 32
 var jump_force: int = 120
+var lives: int = 1
+var invulnerable: bool = false
 var resistance: float = NO_RESISTANCE
 var direction: float = 1
 var counter: int = 0
@@ -25,6 +27,20 @@ func process_vertical_movement(delta: float):
 func jump():
 	motion.y = -jump_force
 	resistance = AIR_RESISTANCE
+
+func take_damage(damage: int):
+	lives -= damage
+	
+	if lives <= 0:
+		on_death()
+	else:
+		after_damage_taken()
+
+func after_damage_taken():
+	pass
+
+func on_death():
+	queue_free()
 
 func physics_process(delta: float):
 	process_horizontal_movement(delta)
