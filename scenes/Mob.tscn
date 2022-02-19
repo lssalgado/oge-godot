@@ -60,29 +60,29 @@ cast_to = Vector2( 0, 17 )
 
 [node name="EventCollisions" type="Node2D" parent="."]
 
-[node name="TopCollision" type="Area2D" parent="EventCollisions"]
+[node name="TopArea" type="Area2D" parent="EventCollisions"]
 modulate = Color( 0.431373, 0, 1, 1 )
 position = Vector2( 0, -0.0278397 )
 monitorable = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EventCollisions/TopCollision"]
+[node name="TopCollision" type="CollisionShape2D" parent="EventCollisions/TopArea"]
 position = Vector2( 0, -6.34622 )
 shape = SubResource( 3 )
 
-[node name="SideCollision" type="Area2D" parent="EventCollisions"]
+[node name="SideArea" type="Area2D" parent="EventCollisions"]
 modulate = Color( 0.431373, 0, 1, 1 )
 monitorable = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EventCollisions/SideCollision"]
+[node name="LeftCollision" type="CollisionShape2D" parent="EventCollisions/SideArea"]
 position = Vector2( -4, 0 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="EventCollisions/SideCollision"]
+[node name="RightCollision" type="CollisionShape2D" parent="EventCollisions/SideArea"]
 position = Vector2( 4, 0 )
 shape = SubResource( 4 )
-[connection signal="body_entered" from="EventCollisions/TopCollision" to="." method="_on_TopCollision_body_entered"]
-[connection signal="body_entered" from="EventCollisions/SideCollision" to="." method="_on_SideCollision_body_entered"]
+[connection signal="body_entered" from="EventCollisions/TopArea" to="." method="_on_TopArea_body_entered"]
+[connection signal="body_entered" from="EventCollisions/SideArea" to="." method="_on_SideArea_body_entered"]

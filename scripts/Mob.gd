@@ -4,7 +4,7 @@ onready var animated_sprite = $AnimatedSprite
 onready var ledge_collision = $Raycasts/LedgeCollision
 onready var jump_collision = $Raycasts/JumpCollision
 onready var wall_collision = $Raycasts/WallCollision
-onready var top_collision = $EventCollisions/TopCollision
+onready var top_area = $EventCollisions/TopArea
 
 func _ready():
 	set_physics_process(true)
@@ -30,11 +30,13 @@ func process_horizontal_movement(delta: float):
 func _physics_process(delta: float):
 	physics_process(delta)
 
-func _on_TopCollision_body_entered(body: Node):
-	if body.global_position.y <= top_collision.global_position.y - 12:
+func _on_TopArea_body_entered(body: Node):
+	if body.global_position.y <= top_area.global_position.y - 12:
 		queue_free()
 	
 
-func _on_SideCollision_body_entered(body):
+func _on_SideArea_body_entered(body):
 	if body.is_in_group("Player") and body.invulnerable == false:
 		body.take_damage()
+
+
