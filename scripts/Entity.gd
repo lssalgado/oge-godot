@@ -28,8 +28,19 @@ func jump():
 	motion.y = -jump_force
 	resistance = AIR_RESISTANCE
 
-func take_damage():
+func take_damage(damage: int):
+	lives -= damage
+	
+	if lives <= 0:
+		on_death()
+	else:
+		after_damage_taken()
+
+func after_damage_taken():
 	pass
+
+func on_death():
+	queue_free()
 
 func physics_process(delta: float):
 	process_horizontal_movement(delta)

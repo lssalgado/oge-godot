@@ -32,11 +32,11 @@ func _physics_process(delta: float):
 
 func _on_TopArea_body_entered(body: Node):
 	if body.global_position.y <= top_area.global_position.y - 12:
-		queue_free()
+		take_damage(1)
 	
 
 func _on_SideArea_body_entered(body):
 	if body.is_in_group("Player") and body.invulnerable == false:
-		body.take_damage()
+		body.take_damage(1)
 
 

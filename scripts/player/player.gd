@@ -14,19 +14,16 @@ func _ready():
 	jump_force = 150
 	lives = 3
 
-func take_damage():
-	print("Damage Taken")
-	
-	lives -= 1
-	
-	if lives <= 0:
-		emit_signal("player_dead")
-	else:
-		animation_effects.play("damage")
-		animation_effects.queue("flash")
-		damage_timer.start()
-		invulnerable = true
-		set_collision_mask_bit(2, false)
+func after_damage_taken():
+	animation_effects.play("damage")
+	animation_effects.queue("flash")
+	damage_timer.start()
+	invulnerable = true
+	set_collision_mask_bit(2, false)
+
+
+func on_death():
+	emit_signal("player_dead")
 
 func process_horizontal_movement(delta: float):
 	.process_horizontal_movement(delta)
