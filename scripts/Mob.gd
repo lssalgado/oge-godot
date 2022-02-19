@@ -22,9 +22,9 @@ func process_horizontal_movement(delta: float):
 	.process_horizontal_movement(delta)
 
 	if is_on_floor():
-		if $Raycasts/WallCollision.is_colliding() and $Raycasts/WallCollision2.is_colliding() == false:
+		if wall_collision.is_colliding() and jump_collision.is_colliding() == false:
 			jump()
-		elif $Raycasts/WallCollision.is_colliding() or $Raycasts/Ledge.is_colliding() == false:
+		elif wall_collision.is_colliding() or ledge_collision.is_colliding() == false:
 			change_direction()
 
 func _physics_process(delta: float):
