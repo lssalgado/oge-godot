@@ -480,4 +480,5 @@ tile_data = PoolIntArray( -65537, 0, 3, -1, 0, 65539, 65535, 0, 65539, 131071, 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Void"]
 position = Vector2( 1200, 260 )
 shape = SubResource( 49 )
+
 [connection signal="body_entered" from="Void" to="." method="_on_Void_body_entered"]
