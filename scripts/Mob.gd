@@ -31,9 +31,9 @@ func _physics_process(delta: float):
 	physics_process(delta)
 
 func _on_TopCollision_body_entered(body: Node):
-	if body.global_position.y > top_collision.global_position.y - 5:
-		return
-	queue_free()
+	if body.global_position.y <= top_collision.global_position.y - 12:
+		queue_free()
+	
 
 func _on_SideCollision_body_entered(body):
 	if body.is_in_group("Player") and body.invulnerable == false:
