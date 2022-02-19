@@ -1,9 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/player/player.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player/player.gd" type="Script" id=2]
-[ext_resource path="res://scripts/PlayerCamera.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Interface.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -118,7 +116,6 @@ drag_margin_right = 0.4
 drag_margin_bottom = 0.3
 editor_draw_limits = true
 editor_draw_drag_margin = true
-script = ExtResource( 3 )
 
 [node name="Timers" type="Node2D" parent="."]
 
@@ -127,7 +124,5 @@ wait_time = 0.8
 one_shot = true
 
 [node name="EventCollisions" type="Node2D" parent="."]
-
-[node name="Interface" parent="." instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="Timers/Damage_Timer" to="." method="_on_Damage_Timer_timeout"]
