@@ -16,7 +16,7 @@ func process_horizontal_movement(delta: float):
 
 	if is_on_floor():
 		if $WallCollision.is_colliding() and $WallCollision2.is_colliding() == false:
-			.jump()
+			jump()
 		elif $WallCollision.is_colliding() or $Ledge.is_colliding() == false:
 			change_direction()
 
